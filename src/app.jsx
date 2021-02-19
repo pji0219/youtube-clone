@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import style from './app.module.css';
 import SearchHeader from './components/search_header/search_header';
+import VideoDetail from './components/video_detail/video_detail';
 import VideoList from './components/video_list/video_list';
 
 function App({ youtube }) {
   const [videos, setVideos] = useState([]);
+  const [selectedVideo, setSelectedVideo] = useState(null);
 
-  // 함수 호출시 검색 API로부터 데이터 받아옴
+  // 비디오 목록에 있는 비디오 선택시 함수 호출되고 선택한 비디오로 데이터가 갱신됨
+  function selectVideo(video) {
+    setSelectedVideo(video);
+  }
+
+  // 함수 호출시 API로부터 검색된 데이터 받아옴
   function search(query) {
     youtube
       .search(query) //
@@ -22,7 +29,8 @@ function App({ youtube }) {
   return (
     <div className={style.app}>
       <SearchHeader onSearch={search} />
-      <VideoList videos={videos} />
+      <VideoList videos={videos} onVideoClick={selectVideo} />
+      {selectedVideo && <VideoDetail video={selectedVideo} />}
     </div>
   );
 }
