@@ -1,10 +1,15 @@
 import React from 'react';
 import styles from './video_item.module.css';
 
-function VideoItem({ video: { snippet } }) {
+function VideoItem({ video, video: { snippet }, onVideoClick, display }) {
   // props 안에 있는 것을 구조분해 할당
+  const displayType = display === 'list' ? styles.list : styles.grid;
+
   return (
-    <li className={styles.container}>
+    <li
+      className={`${styles.container} ${displayType}`}
+      onClick={() => onVideoClick(video)}
+    >
       <div className={styles.video}>
         <img
           className={styles.thumbnails}
