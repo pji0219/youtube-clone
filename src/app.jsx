@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styles from './app.module.css';
 import SearchHeader from './components/search_header/search_header';
 import VideoDetail from './components/video_detail/video_detail';
@@ -14,12 +14,14 @@ function App({ youtube }) {
   }
 
   // 함수 호출시 API로부터 검색된 데이터 받아옴
-  function search(query) {
+  const search = useCallback(function search(query) {
     youtube
       .search(query) //
-      .then((videos) => setVideos(videos));
-  }
-
+      .then((videos) => {
+        setVideos(videos);
+        setSelectedVideo(null);
+      });
+  });
   // 처음 앱이 시작었을 때 API로부터 가장 인기 많은 영상 데이터 받아옴
   useEffect(() => {
     youtube

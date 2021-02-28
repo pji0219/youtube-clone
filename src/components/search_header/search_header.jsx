@@ -1,8 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useRef, memo } from 'react';
 import styles from './search_header.module.css';
 
 function SearchHeader(props) {
-  const inputRef = useRef(); // input에 입력된 값을 받아옴
+  const inputRef = useRef(); // input에 입력된 값을 받아옴 (DOM 조작)
 
   function handleSearch() {
     const value = inputRef.current.value;
@@ -18,6 +18,7 @@ function SearchHeader(props) {
       handleSearch();
     }
   }
+  console.log('Header!!!');
 
   return (
     <header className={styles.header}>
@@ -43,4 +44,4 @@ function SearchHeader(props) {
   );
 }
 
-export default SearchHeader;
+export default memo(SearchHeader);
