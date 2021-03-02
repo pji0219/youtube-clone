@@ -14,14 +14,17 @@ function App({ youtube }) {
   }
 
   // 함수 호출시 API로부터 검색된 데이터 받아옴
-  const search = useCallback(function search(query) {
-    youtube
-      .search(query) //
-      .then((videos) => {
-        setVideos(videos);
-        setSelectedVideo(null);
-      });
-  });
+  const search = useCallback(
+    function search(query) {
+      youtube
+        .search(query) //
+        .then((videos) => {
+          setVideos(videos);
+          setSelectedVideo(null);
+        });
+    },
+    [youtube]
+  ); // youtube API를 불러올 때만 렌더링
   // 처음 앱이 시작었을 때 API로부터 가장 인기 많은 영상 데이터 받아옴
   useEffect(() => {
     youtube
