@@ -18,7 +18,6 @@ function SearchHeader(props) {
       handleSearch();
     }
   }
-  console.log('Header!!!');
 
   return (
     <header className={styles.header}>
